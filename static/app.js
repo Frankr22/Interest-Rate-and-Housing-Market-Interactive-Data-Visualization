@@ -1,34 +1,37 @@
-// Make a GET request to the Flask API endpoint
-fetch('/api/data')
-  .then(response => response.json())
-  .then(data => {
-    // Get the table body element
-    let tbody = document.querySelector('tbody');
+document.addEventListener("DOMContentLoaded", function(){
 
-    // Clear any existing rows from the table
-    tbody.innerHTML = '';
+  // Make a GET request to the Flask API endpoint
+  fetch('/api/data')
+    .then(response => response.json())
+    .then(data => {
+      // Get the table body element
+      let tbody = document.querySelector('tbody');
 
-    // Iterate through the data and create a new row for each item
-    data.forEach(item => {
-      let row = document.createElement('tr');
+      // Clear any existing rows from the table
+      tbody.innerHTML = '';
 
-      // Create a new cell for each data point
-      let date = document.createElement('td');
-      let change = document.createElement('td');
-      let cashRate = document.createElement('td');
+      // Iterate through the data and create a new row for each item
+      data.forEach(item => {
+        let row = document.createElement('tr');
 
-      // Set the cell's text content to the data
-      date.textContent = item.date;
-      change.textContent = item.change_pct;
-      cashRate.textContent = item.cash_rate_pct;
+        // Create a new cell for each data point
+        let date = document.createElement('td');
+        let change = document.createElement('td');
+        let cashRate = document.createElement('td');
 
-      // Append the cells to the row
-      row.appendChild(date);
-      row.appendChild(change);
-      row.appendChild(cashRate);
+        // Set the cell's text content to the data
+        date.textContent = item.date;
+        change.textContent = item.change_pct;
+        cashRate.textContent = item.cash_rate_pct;
 
-      // Append the row to the table body
-      tbody.appendChild(row);
-    });
-  })
-  .catch(error => console.error(error));
+        // Append the cells to the row
+        row.appendChild(date);
+        row.appendChild(change);
+        row.appendChild(cashRate);
+
+        // Append the row to the table body
+        tbody.appendChild(row);
+      });
+    })
+    .catch(error => console.error(error));
+});
