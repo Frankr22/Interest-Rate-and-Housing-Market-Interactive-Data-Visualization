@@ -5,6 +5,7 @@ import requests
 import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy import inspect
+from flask_cors import CORS
 
 # Make a request to the RBA website
 url = 'https://www.rba.gov.au/statistics/cash-rate/'
@@ -38,6 +39,7 @@ df.columns = ["date", "change_pct", "cash_rate_pct"]
 print(df)
 
 app = Flask(__name__)
+CORS(app)
 
 # connect to database using SQLAlchemy
 protocol = 'postgresql'
@@ -66,7 +68,7 @@ def data():
     query = 'SELECT date, change_pct, cash_rate_pct FROM interest_rates'
     df = pd.read_sql_query(query, con=engine)
     # Convert the data to a JSON object
-    data = df.to_json(orient='records')
+    data = df.to_json(orient='records', force_ascii=False)
     return jsonify(data)
 
 if __name__ == '__main__':
