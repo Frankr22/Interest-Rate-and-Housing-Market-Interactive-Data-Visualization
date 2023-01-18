@@ -28,6 +28,21 @@ body {
   section#data {
     padding: 2em;
   }
+
+  .table-wrapper-scroll-y {
+    display: block;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  tr {
+    height: 30px;
+  }
+
+  td {
+    font-size: 13px;
+  }
+  
   
   section#conclusion {
     padding: 2em;

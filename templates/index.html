@@ -5,9 +5,12 @@
     <title>Interest Rate Changes and the Australian Housing Market</title>
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"/>
     <script src="../static/app.js"></script>
   </head>
   <body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <header>
       <h1 class="text-center">Interest Rate Changes and the Australian Housing Market</h1>
     </header>
@@ -46,19 +49,21 @@
       </section>
       <section id="data">
         <h2>Data Table</h2>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Change (%)</th>
-              <th>Cash Rate (%)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- data goes here -->
-          </tbody>
-        </table>
-      </section>
+        <div class="table-wrapper-scroll-y">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Change (%)</th>
+                <th>Cash Rate (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- data goes here -->
+            </tbody>
+          </table>
+        </div>
+    </section>    
       <section id="conclusion">
         <h2>Conclusion</h2>
         <p>...content goes here...</p>
@@ -68,4 +73,6 @@
       <div class="container-fluid">
         <p>Copyright &copy; 2023 - Interest Rate Changes and the Australian Housing Market</p>
       </div>
-    </footer
+    </footer>
+  </body>
+</html>
