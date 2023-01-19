@@ -40,62 +40,44 @@ parsedData.forEach(item => {
   row.appendChild(change);
   row.appendChild(cashRate);
 
-  // Append the row to the table body
-  tbody.appendChild(row);
-});
-
-// Create the Line Chart Cash Rate vs. Date
-// Get the canvas element
-var ctx = document.getElementById('line-chart').getContext('2d');
-
-// Define the data for the graph
-var data = {
-    labels: [], // X-axis labels (dates)
-    datasets: [{
-        label: 'Cash Rate (%)',
-        data: [], // Y-axis data (cash rate)
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1
-    }]
-};
-
-// Define the options for the graph
-var options = {
-    scales: {
-        y: {
-            beginAtZero: true
-        }
-    }
-};
-
-// Create the chart
-var lineChart = new Chart(ctx, {
-    type: 'line',
-    data: data,
-    options: options
-});
-
-  // Get data and populate line graph
-  // Get the data from the data table
-  var tableData = document.querySelectorAll('table tbody tr');
-
-  // Sort the table data by date
-  tableData.sort(function(a, b) {
-      var dateA = new Date(a.children[0].textContent);
-      var dateB = new Date(b.children[0].textContent);
-      return dateA - dateB;
+    // Append the row to the table body
+    tbody.appendChild(row);
   });
 
-  // Extract the date and cash rate data
-  [...tableData].sort((a, b) => new Date(a.children[0].textContent) - new Date(b.children[0].textContent)).forEach(function(row) {
+        // Define the data for the chart
+    var data = [{
+      x: [], // X-axis labels (dates)
+      y: [], // Y-axis data (cash rate)
+      type: 'line'
+    }];
 
-    // Add the data to the graph
-    data.labels.push(date);
-    data.datasets[0].data.push(cashRate);
-});
+    // Define the layout for the chart
+    var layout = {
+      xaxis: {
+          type: 'date',
+          rangeslider: {
+              visible: true
+          }
+      },
+      yaxis: {
+          title: 'Cash Rate (%)'
+      }
+    };
 
-  // Update the chart with the new data
-  lineChart.update();
+    // Get the data from the table
+    var tableData = document.querySelectorAll('table tbody tr');
+
+    // Extract the date and cash rate data
+    Array.from(tableData).sort((a, b) => new Date(a.children[0].textContent) - new Date(b.children[0].textContent)).forEach(function(row) {
+      var date = new Date(row.children[0].textContent);
+      var cashRate = parseFloat(row.children[2].textContent);
+      // Add the data to the chart
+      data[0].x.push(date);
+      data[0].y.push(cashRate);
+    });
+
+    // Create the chart
+    Plotly.newPlot('line-chart', data, layout);
+
 });
 });
