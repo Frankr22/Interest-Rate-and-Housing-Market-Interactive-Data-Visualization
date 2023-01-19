@@ -15,25 +15,20 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Installing
 - Clone the repository to your local machine:
-Copy code
-git clone https://github.com/[username]/Interest-Rate-Changes-and-the-Australian-Housing-Market.git
+  - Copy code: git clone https://github.com/Frankr22/InteractiveDataViz.git
 
 - Install the required packages:
-Copy code
-pip install -r requirements.txt
+  - Copy code: pip install -r requirements.txt
 
 - Start the development server:
-Copy code
-python app.py
+  - Copy code python app.py
 
-- Open the application in your browser:
-Copy code
-http://127.0.0.1:5000/
+- Open the index.html in your browser
 
 ## Built With
-Flask - The web framework used
-Plotly.js - JavaScript library for creating interactive charts
-Bootstrap 4 - Front-end component library
+- Flask - The web framework used
+- Plotly.js - JavaScript library for creating interactive charts
+- Bootstrap 4 - Front-end component library
 
 ## Acknowledgments
 Data used in this project is sourced from the Reserve Bank of Australia's official website.
