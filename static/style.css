@@ -2,22 +2,40 @@ body {
     font-family: Arial, sans-serif;
     padding: 1em;
   }
+
+.header-section {
+  display: flex;
+  align-items: center;
+  }
+
+.header-image {
+  float: left; /* or right */
+  margin-right: 10px; /* or left */
+  }
+
+.header-title {
+  margin: 0;
+  }   
   
-  header h1 {
-    margin-top: 2em;
-    margin-bottom: 1em;
+header h1 {
+  margin-top: 2em;
+  margin-bottom: 1em;
   }
   
+  p {
+    font-size: 13px;
+  }
+
   nav {
     margin-bottom: 2em;
   }
   
   section {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
   }
   
   section#overview {
-    padding: 2em;
+    padding: 1em;
     background-color: #f9f9f9;
   }
   
@@ -42,7 +60,6 @@ body {
   td {
     font-size: 13px;
   }
-  
   
   section#conclusion {
     padding: 2em;
