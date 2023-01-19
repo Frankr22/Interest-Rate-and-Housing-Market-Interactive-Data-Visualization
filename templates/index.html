@@ -6,7 +6,14 @@
       <img src="../data/DALL·E 2023-01-18 12.38.05 - Interest Rate Changes and the Australian Housing Market.png" alt="Header Image" width="25%" height="25%" class="header-image">
       <h1 class="header-title">Interest Rate Changes and the Australian Housing Market</h1>
    </div>
-   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="../static/app.js"></script>
@@ -39,31 +46,45 @@
             When the cash rate increases, borrowing becomes more expensive, leading to higher mortgage rates and potentially slowing down the housing market. Conversely, when the cash rate decreases, borrowing becomes cheaper and the housing market may be stimulated.
             In this dashboard, we will explore the relationship between changes in the RBA's cash rate and changes in mortgage rates and house prices in Australia. Using interactive visualizations, you will be able to see how these variables have changed over time, and how they have been affected by changes in the cash rate. Additionally, we will provide a data table that you can sort and filter through to gain a deeper understanding of the data. By the end of this dashboard, you will have a better understanding of the impact of interest rate changes on the Australian housing market.</p>
       </section>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-6">
+            <section id="data">
+              <h2>Data Tables</h2>
+              <div class="table-wrapper-scroll-y">
+                <table class="table data-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Change (%)</th>
+                      <th>Cash Rate (%)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- data goes here -->
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+          <div class="col-6">
+          <!-- other content goes here -->
+          </div>
+        </div>
+      </div>       
       <section id="visualization">
-        <h2>Interactive Visualization</h2>
+        <h2>Interactive Visualizations</h2>
         <div class="card">
           <div class="card-body">
             <div id="line-chart"></div>
           </div>
         </div>
-      </section>
-      <section id="data">
-        <h2>Data Table</h2>
-        <div class="table-wrapper-scroll-y">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Change (%)</th>
-                <th>Cash Rate (%)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- data goes here -->
-            </tbody>
-          </table>
+        <div class="card">
+          <div class="card-body">
+            <div id="map"></div>
+          </div>
         </div>
-      </section>    
+      </section>
       <section id="conclusion">
         <h2>Conclusion</h2>
         <p>...content goes here...</p>

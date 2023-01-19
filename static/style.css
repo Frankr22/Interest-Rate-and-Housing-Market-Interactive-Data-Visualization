@@ -18,16 +18,16 @@ body {
   }   
   
 header h1 {
-  margin-top: 2em;
+  margin-top: 1em;
   margin-bottom: 1em;
   }
-  
+
   p {
     font-size: 13px;
   }
 
   nav {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
   }
   
   section {
@@ -40,11 +40,11 @@ header h1 {
   }
   
   section#visualization {
-    padding: 2em;
+    padding: 1em;
   }
   
   section#data {
-    padding: 2em;
+    padding: 1em;
   }
 
   .table-wrapper-scroll-y {
@@ -52,6 +52,14 @@ header h1 {
     max-height: 200px;
     overflow-y: auto;
   }
+
+  table tbody tr {
+    height: 20px;
+  }
+
+  table {
+  font-size: 12px;
+}
 
   tr {
     height: 30px;
@@ -62,13 +70,18 @@ header h1 {
   }
   
   section#conclusion {
-    padding: 2em;
+    padding: 1em;
     background-color: #f9f9f9;
   }
   
   footer {
-    margin-top: 2em;
+    margin-top: 1em;
     padding: 1em;
     background-color: #f9f9f9;
     text-align: center;
+  }
+
+  #map {
+    width: 100%;
+    height: 600px;
   }

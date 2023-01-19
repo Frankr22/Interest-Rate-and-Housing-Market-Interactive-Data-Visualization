@@ -10,16 +10,17 @@ document.addEventListener("DOMContentLoaded", function(){
   // Clear any existing rows from the table
     tbody.innerHTML = '';
 
-// Initialize DataTables on the table
-$(document).ready( function () {
-  $('#data-table').DataTable({
-      "paging":   true,
-      "ordering": true,
-      "info":     true,
-      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-      "pageLength": 5
+  // Initialize DataTables on the table
+  $(document).ready(function() {
+    $('#data-table').DataTable({
+      "paging":   false,
+      "ordering": false,
+      "info":     false,
+      "searching": false,
+      "lengthChange": false,
+      "pageLength": 10
+    });
   });
-});
 
 // Iterate through the data and create a new row for each item
 parsedData.forEach(item => {
@@ -79,5 +80,49 @@ parsedData.forEach(item => {
     // Create the chart
     Plotly.newPlot('line-chart', data, layout);
 
+    // Initialize the map
+    var map = L.map('map').setView([-25, 135], 4);
+
+    // Add the tile layer to the map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Use this link to get the Austalian States GeoJSON data
+    let link = "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.min.geojson";
+
+    // Getting our GeoJSON data
+    d3.json(link).then(function(data) {
+      // Creating a GeoJSON layer with the retrieved data
+      L.geoJson(data, {
+        // This is called on each feature.
+        onEachFeature: function(feature, layer) {
+          // Set the mouse events to change the map styling.
+          layer.on({
+            // When a user's mouse cursor touches a map feature, the mouseover event calls this function, which makes that feature's opacity change to 90% so that it stands out.
+            mouseover: function(event) {
+              layer = event.target;
+              layer.setStyle({
+                fillOpacity: 0.9
+              });
+            },
+            // When the cursor no longer hovers over a map feature (that is, when the mouseout event occurs), the feature's opacity reverts back to 50%.
+            mouseout: function(event) {
+              layer = event.target;
+              layer.setStyle({
+                fillOpacity: 0.5
+              });
+            },
+            // When a feature (state) is clicked, it enlarges to fit the screen.
+            click: function(event) {
+              myMap.fitBounds(event.target.getBounds());
+            }
+          });
+          // Giving each feature a popup with information that's relevant to it
+          layer.bindPopup("<h1>" + feature.properties.STATE_NAME);
+
+        }
+      }).addTo(map);
+});
 });
 });
