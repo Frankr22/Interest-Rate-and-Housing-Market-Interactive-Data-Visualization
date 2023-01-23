@@ -25,27 +25,6 @@ document.addEventListener("DOMContentLoaded", function(){
       });
   });
 
-    $(document).ready(function() {
-      $.ajax({
-          type: "GET",
-          url: "http://127.0.0.1:5000/abs/data",
-          success: function(data) {
-              // Parse the JSON string into a JavaScript object
-              var jsonData = JSON.parse(data);
-              // Initialize the DataTable
-              var table = $("#abs-data-table").DataTable({
-                  scrollY: "200px",
-                  order: [[1, 'desc']],
-                  data: jsonData,
-                  columns: [
-                      { data: "time_period" },
-                      { data: "mean_price" }
-                  ]
-              });
-          }
-      });
-  });
-
   $(document).ready(function() {
       $.ajax({
           type: "GET",
@@ -57,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function(){
               var table = $("#abs-data-table").DataTable({
                   scrollY: "200px",
                   data: jsonData,
-                  order: [[ 0, "desc" ]],
+                  order: [[ 1, "desc" ]],
                   searching: false,
                   columns: [
                       { data: "time_period" },
@@ -116,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function(){
     // Plotly.newPlot('line-chart', data, layout);
 
   // Initialize the map
-  var map = L.map('map').setView([-25, 135], 5);
+  var map = L.map('map').setView([-25, 135], 4);
 
   // Add the tile layer to the map
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

@@ -42,7 +42,7 @@
     </nav>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-4">
+        <div class="col-8">
           <section id="overview">
             <h2>Overview</h2>
             <p>The Reserve Bank of Australia (RBA) sets the cash rate, which is the interest rate at which banks can borrow money from the RBA. Changes to the cash rate can have a significant impact on the Australian economy, particularly on the housing market. 
@@ -50,12 +50,28 @@
                 In this dashboard, we will explore the relationship between changes in the RBA's cash rate and changes in mortgage rates and house prices in Australia. Using interactive visualizations, you will be able to see how these variables have changed over time, and how they have been affected by changes in the cash rate. Additionally, we will provide a data table that you can sort and filter through to gain a deeper understanding of the data. By the end of this dashboard, you will have a better understanding of the impact of interest rate changes on the Australian housing market.</p>
           </section>
         </div>
-        <div class="col-8"></div>
+        <div class="col-4">
+          <section id="calculator">
+            <form>
+              <label>Enter Mortgage Size:</label>
+              <input type="text" id="mortgageSize" name="mortgageSize" required>
+              <br>
+              <label>Enter current APR:</label>
+              <input type="text" id="currentAPR" name="currentAPR" required>
+              <br>
+              <label>Enter Future APR:</label>
+              <input type="text" id="futureAPR" name="futureAPR" required>
+              <br><br>
+              <button type="button" onclick="calculateMortgageRepayments()">Calculate Repayments</button>
+            </form> 
+          <p id="repayments"></p>
+        </section>
+        </div>
       </div>
       </div>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-2">
+          <div class="col-3">
             <h2>RBA Cash Rate</h2>
             <section id="data">
                 <table id = "rba-data-table" class="table data-table">
@@ -72,23 +88,42 @@
                 </table>
               </section>
           </div>
-          <div class="col-2">
-            <h2>Mean House Price (Australia)</h2>
+          <div class="col-3">
+            <h2>House Prices</h2>
             <section id="data">
-                <table id="abs-data-table" class="table data-table">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Average House Price in Australia</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- data goes here -->
-                  </tbody>
-                </table>
-              </section>
-            </div>
-            <div class="col-8">
+              <table id="abs-data-table" class="table data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Average House Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- data goes here -->
+                </tbody>
+              </table>
+            </section>
+          </div>
+          <div class="col-8">
+            <h2>Mortgage Rates</h2>
+            <section id="data">
+              <table id="mortgage-data-table" class="table data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Change (%)</th>
+                    <th>Rate (%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- data goes here -->
+                </tbody>
+              </table>
+            </section>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
               <h2>Interactive Visualizations</h2>
               <section id="visualization">
                 <div class="card">
@@ -96,6 +131,10 @@
                     <div id="line-chart"></div>
                   </div>
                 </div>
+              </section>
+            </div>
+            <div class="col-6">
+              <section id="visualization">
                 <div class="card">
                   <div class="card-body">
                     <div id="map"></div>
