@@ -55,16 +55,19 @@ aus_df.insert(0, 'id', range(1, 1+len(aus_df)))
 aus_df = aus_df.rename(columns={'time period': 'time_period', 'mean price of residential dwelling': 'mean_price'})
 aus_df.head()
 
-# connect to database using SQLAlchemy
+# connect to cloud database using SQLAlchemy
 protocol = 'postgresql'
-username = 'postgres'
-password = 'postgres'
-host = 'localhost'
+username = 'anshumanp'
+password = 'Anshuman123'
+host = 'mydbinstance-anshu.c3y42tkkiinb.us-east-2.rds.amazonaws.com'
 port = 5432
 database_name = 'rates_db'
 rds_connection_string = f'{protocol}://{username}:{password}@{host}:{port}/{database_name}'
 engine = create_engine(rds_connection_string)
 insp = inspect(engine)
+
+# Confirm tables
+insp.get_table_names()
 
 # Confirm tables
 insp.get_table_names()

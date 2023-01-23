@@ -12,14 +12,13 @@ document.addEventListener("DOMContentLoaded", function(){
               var table = $("#rba-data-table").DataTable({
                   scrollY: "200px",
                   data: jsonData,
-                  order: [[ 1, "desc" ]],
+                  order: [[ 0, "desc" ]],
                   searching: false,
                   columns: [
                       { data: "date"},
                       { data: "change_pct" },
                       { data: "cash_rate_pct" },
                   ]
-
               });
           }
       });
@@ -36,10 +35,10 @@ document.addEventListener("DOMContentLoaded", function(){
               var table = $("#abs-data-table").DataTable({
                   scrollY: "200px",
                   data: jsonData,
-                  order: [[ 1, "desc" ]],
+                  order: [[ 0, "desc" ]],
                   searching: false,
                   columns: [
-                      { data: "time_period" },
+                      { data: "date" },
                       { data: "mean_price" },
                   ]
               });
@@ -47,23 +46,25 @@ document.addEventListener("DOMContentLoaded", function(){
       });
   });
 
-    // // Get the data from both tables
-    // var rbaTableData = document.querySelectorAll('#rba-data-table tbody tr');
+    // Get the data from both tables
+    var rbaTableData = document.querySelectorAll('#rba-data-table tbody tr');
     // var absTableData = document.querySelectorAll('#abs-data-table tbody tr');
 
-    // // Extract the date and cash rate data
-    // Array.from(rbaTableData).sort((a, b) => new Date(a.children[0].textContent) - new Date(b.children[0].textContent)).forEach(function(row) {
-    //   var date = new Date(row.children[0].textContent);
-    //   var cashRate = parseFloat(row.children[2].textContent);
-    //   // Add the cash rate data to the chart
-    //   data[0].x.push(date);
-    //   data[0].y.push(cashRate);
-    // });
+    // Extract the date and cash rate data
+    Array.from(rbaTableData).sort((a, b) => new Date(a.children[0].textContent) - new Date(b.children[0].textContent)).forEach(function(row) {
+      var date = new Date(row.children[0].textContent);
+      var cashRate = parseFloat(row.children[2].textContent);
+
+      // Add the cash rate data to the chart
+      data[0].x.push(date);
+      data[0].y.push(cashRate);
+    });
     
     // // Extract the date and house price data
     // Array.from(absTableData).sort((a, b) => new Date(a.children[0].textContent) - new Date(b.children[0].textContent)).forEach(function(row) {
     //   var date = new Date(row.children[0].textContent);
     //   var housePrice = parseFloat(row.children[1].textContent);
+
     //  // Add the data to the chart
     //   data.push({
     //   x: [date],
@@ -72,27 +73,27 @@ document.addEventListener("DOMContentLoaded", function(){
     //   name: 'House Price'
     // });
 
-    // // Define the chart layout
-    // var layout = {
-    //   xaxis: {
-    //       type: 'date',
-    //       rangeslider: {
-    //           visible: true
-    //       }
-    //   },
-    //   yaxis: {
-    //       title: 'Cash Rate (%)'
-    //   },
+    // Define the chart layout
+    var layout = {
+      xaxis: {
+          type: 'date',
+          rangeslider: {
+              visible: true
+          }
+      },
+      yaxis: {
+          title: 'Cash Rate (%)'
+      },
     //   yaxis2: {
     //     title: 'House Price (AUD)',
     //     overlaying: 'y',
     //     side: 'right',
     //     showgrid: false
     //   },
-    // };
+    };
 
-    // Create the chart
-    // Plotly.newPlot('line-chart', data, layout);
+    //Create the chart
+    Plotly.newPlot('line-chart', data, layout);
 
   // Initialize the map
   var map = L.map('map').setView([-25, 135], 4);
