@@ -44,10 +44,17 @@ header h1 {
   
   section#visualization {
     padding: 1em;
+    background-color: #f9f9f9;
   }
   
   section#data {
     padding: 1em;
+    background-color: #f9f9f9;
+  }
+
+  section#calculator {
+    padding: 1em;
+    background-color: #f9f9f9;
   }
 
   table.dataTable.nowrap {
@@ -56,7 +63,8 @@ header h1 {
 }
 
   table tbody tr {
-    height: 20px;
+    height: 10px;
+    font-size: 16px;
   }
 
   table {
@@ -87,3 +95,19 @@ header h1 {
     width: 100%;
     height: 600px;
   }
+
+  .header-image {
+    float: left; /* or right */
+    margin-right: 10px; /* or left */
+    max-width: 80px;
+    max-height: 80px;
+  }
+
+  .header-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #f8f5fa, #1e506d);
+}
+
+  

@@ -11,12 +11,13 @@ document.addEventListener("DOMContentLoaded", function(){
               // Initialize the DataTable
               var table = $("#rba-data-table").DataTable({
                   scrollY: "200px",
-                  order: [[1, 'desc']],
                   data: jsonData,
+                  order: [[ 1, "desc" ]],
+                  searching: false,
                   columns: [
                       { data: "date"},
                       { data: "change_pct" },
-                      { data: "cash_rate_pct" }
+                      { data: "cash_rate_pct" },
                   ]
 
               });
@@ -45,42 +46,77 @@ document.addEventListener("DOMContentLoaded", function(){
       });
   });
 
-  // Define the data for the chart
-  var data = [{
-    x: [], // X-axis labels (dates)
-    y: [], // Y-axis data (cash rate)
-    type: 'line'
-  }];
-
-  // Define the layout for the chart
-  var layout = {
-    xaxis: {
-        type: 'date',
-        rangeslider: {
-            visible: true
-        }
-    },
-    yaxis: {
-        title: 'Cash Rate (%)'
-    }
-  };
-
-  // Get the data from the table
-  var tableData = document.querySelectorAll('table tbody tr');
-
-  // Extract the date and cash rate data
-  Array.from(tableData).sort((a, b) => new Date(a.children[0].textContent) - new Date(b.children[0].textContent)).forEach(function(row) {
-    var date = new Date(row.children[0].textContent);
-    var cashRate = parseFloat(row.children[2].textContent);
-    // Add the data to the chart
-    data[0].x.push(date);
-    data[0].y.push(cashRate);
+  $(document).ready(function() {
+      $.ajax({
+          type: "GET",
+          url: "http://127.0.0.1:5000/abs/data",
+          success: function(data) {
+              // Parse the JSON string into a JavaScript object
+              var jsonData = JSON.parse(data);
+              // Initialize the DataTable
+              var table = $("#abs-data-table").DataTable({
+                  scrollY: "200px",
+                  data: jsonData,
+                  order: [[ 0, "desc" ]],
+                  searching: false,
+                  columns: [
+                      { data: "time_period" },
+                      { data: "mean_price" },
+                  ]
+              });
+          }
+      });
   });
-  // Create the chart
-  Plotly.newPlot('line-chart', data, layout);
+
+    // // Get the data from both tables
+    // var rbaTableData = document.querySelectorAll('#rba-data-table tbody tr');
+    // var absTableData = document.querySelectorAll('#abs-data-table tbody tr');
+
+    // // Extract the date and cash rate data
+    // Array.from(rbaTableData).sort((a, b) => new Date(a.children[0].textContent) - new Date(b.children[0].textContent)).forEach(function(row) {
+    //   var date = new Date(row.children[0].textContent);
+    //   var cashRate = parseFloat(row.children[2].textContent);
+    //   // Add the cash rate data to the chart
+    //   data[0].x.push(date);
+    //   data[0].y.push(cashRate);
+    // });
+    
+    // // Extract the date and house price data
+    // Array.from(absTableData).sort((a, b) => new Date(a.children[0].textContent) - new Date(b.children[0].textContent)).forEach(function(row) {
+    //   var date = new Date(row.children[0].textContent);
+    //   var housePrice = parseFloat(row.children[1].textContent);
+    //  // Add the data to the chart
+    //   data.push({
+    //   x: [date],
+    //   y: [housePrice],
+    //   type: 'line',
+    //   name: 'House Price'
+    // });
+
+    // // Define the chart layout
+    // var layout = {
+    //   xaxis: {
+    //       type: 'date',
+    //       rangeslider: {
+    //           visible: true
+    //       }
+    //   },
+    //   yaxis: {
+    //       title: 'Cash Rate (%)'
+    //   },
+    //   yaxis2: {
+    //     title: 'House Price (AUD)',
+    //     overlaying: 'y',
+    //     side: 'right',
+    //     showgrid: false
+    //   },
+    // };
+
+    // Create the chart
+    // Plotly.newPlot('line-chart', data, layout);
 
   // Initialize the map
-  var map = L.map('map').setView([-25, 135], 4);
+  var map = L.map('map').setView([-25, 135], 5);
 
   // Add the tile layer to the map
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
