@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <div class="header-section">
-      <img src="../data/DALL·E 2023-01-18 12.38.05 - Interest Rate Changes and the Australian Housing Market.png" alt="Header Image" width="25%" height="25%" class="header-image">
+      <img src="../data/DALL·E 2023-01-18 12.38.05 - Interest Rate Changes and the Australian Housing Market.png" alt="Header Image" width="5%" height="5%" class="header-image">
       <h1 class="header-title">Interest Rate Changes and the Australian Housing Market</h1>
+      <a href="https://github.com/Frankr22/InteractiveDataViz" class="github-link">Github</a>
    </div>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -40,19 +41,24 @@
       </div>
     </nav>
     <div class="container-fluid">
-      <section id="overview">
-        <h2>Overview</h2>
-        <p>The Reserve Bank of Australia (RBA) sets the cash rate, which is the interest rate at which banks can borrow money from the RBA. Changes to the cash rate can have a significant impact on the Australian economy, particularly on the housing market. 
-            When the cash rate increases, borrowing becomes more expensive, leading to higher mortgage rates and potentially slowing down the housing market. Conversely, when the cash rate decreases, borrowing becomes cheaper and the housing market may be stimulated.
-            In this dashboard, we will explore the relationship between changes in the RBA's cash rate and changes in mortgage rates and house prices in Australia. Using interactive visualizations, you will be able to see how these variables have changed over time, and how they have been affected by changes in the cash rate. Additionally, we will provide a data table that you can sort and filter through to gain a deeper understanding of the data. By the end of this dashboard, you will have a better understanding of the impact of interest rate changes on the Australian housing market.</p>
-      </section>
+      <div class="row">
+        <div class="col-4">
+          <section id="overview">
+            <h2>Overview</h2>
+            <p>The Reserve Bank of Australia (RBA) sets the cash rate, which is the interest rate at which banks can borrow money from the RBA. Changes to the cash rate can have a significant impact on the Australian economy, particularly on the housing market. 
+                When the cash rate increases, borrowing becomes more expensive, leading to higher mortgage rates and potentially slowing down the housing market. Conversely, when the cash rate decreases, borrowing becomes cheaper and the housing market may be stimulated.
+                In this dashboard, we will explore the relationship between changes in the RBA's cash rate and changes in mortgage rates and house prices in Australia. Using interactive visualizations, you will be able to see how these variables have changed over time, and how they have been affected by changes in the cash rate. Additionally, we will provide a data table that you can sort and filter through to gain a deeper understanding of the data. By the end of this dashboard, you will have a better understanding of the impact of interest rate changes on the Australian housing market.</p>
+          </section>
+        </div>
+        <div class="col-8"></div>
+      </div>
+      </div>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-6">
+          <div class="col-2">
+            <h2>RBA Cash Rate</h2>
             <section id="data">
-              <h2>Data Tables</h2>
-              <div class="table-wrapper-scroll-y">
-                <table class="table data-table">
+                <table id = "rba-data-table" class="table data-table">
                   <thead>
                     <tr>
                       <th>Date</th>
@@ -64,31 +70,45 @@
                     <!-- data goes here -->
                   </tbody>
                 </table>
-              </div>
-            </section>
+              </section>
           </div>
-          <div class="col-6">
-          <!-- other content goes here -->
+          <div class="col-2">
+            <h2>Mean House Price (Australia)</h2>
+            <section id="data">
+                <table id="abs-data-table" class="table data-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Average House Price in Australia</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- data goes here -->
+                  </tbody>
+                </table>
+              </section>
+            </div>
+            <div class="col-8">
+              <h2>Interactive Visualizations</h2>
+              <section id="visualization">
+                <div class="card">
+                  <div class="card-body">
+                    <div id="line-chart"></div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <div id="map"></div>
+                  </div>
+                </div>
+              </section>
+            </div>
           </div>
         </div>
-      </div>       
-      <section id="visualization">
-        <h2>Interactive Visualizations</h2>
-        <div class="card">
-          <div class="card-body">
-            <div id="line-chart"></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <div id="map"></div>
-          </div>
-        </div>
-      </section>
-      <section id="conclusion">
-        <h2>Conclusion</h2>
-        <p>...content goes here...</p>
-      </section>
+        <section id="conclusion">
+          <h2>Conclusion</h2>
+          <p>...content goes here...</p>
+        </section>
     </div>
     <footer>
       <div class="container-fluid">

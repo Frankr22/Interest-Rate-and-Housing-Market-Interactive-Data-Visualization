@@ -1,7 +1,7 @@
 // Add event listener
 document.addEventListener("DOMContentLoaded", function(){
 
-    $(document).ready(function() {
+  $(document).ready(function() {
       $.ajax({
           type: "GET",
           url: "http://127.0.0.1:5000/rba/data",
@@ -12,12 +12,34 @@ document.addEventListener("DOMContentLoaded", function(){
               var table = $("#rba-data-table").DataTable({
                   scrollY: "200px",
                   data: jsonData,
-                  order: [[ 0, "desc" ]],
+                  order: [[ 1, "desc" ]],
                   searching: false,
                   columns: [
                       { data: "date"},
                       { data: "change_pct" },
                       { data: "cash_rate_pct" },
+                  ]
+
+              });
+          }
+      });
+  });
+
+    $(document).ready(function() {
+      $.ajax({
+          type: "GET",
+          url: "http://127.0.0.1:5000/abs/data",
+          success: function(data) {
+              // Parse the JSON string into a JavaScript object
+              var jsonData = JSON.parse(data);
+              // Initialize the DataTable
+              var table = $("#abs-data-table").DataTable({
+                  scrollY: "200px",
+                  order: [[1, 'desc']],
+                  data: jsonData,
+                  columns: [
+                      { data: "time_period" },
+                      { data: "mean_price" }
                   ]
               });
           }
