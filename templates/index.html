@@ -17,10 +17,12 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="../static/app.js"></script>
   </head>
   <body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -42,54 +44,42 @@
     </nav>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-8">
+        <div class="col-sm-12">
           <section id="overview">
             <h2>Overview</h2>
-            <p>The Reserve Bank of Australia (RBA) sets the cash rate, which is the interest rate at which banks can borrow money from the RBA. Changes to the cash rate can have a significant impact on the Australian economy, particularly on the housing market. 
-                When the cash rate increases, borrowing becomes more expensive, leading to higher mortgage rates and potentially slowing down the housing market. Conversely, when the cash rate decreases, borrowing becomes cheaper and the housing market may be stimulated.
-                In this dashboard, we will explore the relationship between changes in the RBA's cash rate and changes in mortgage rates and house prices in Australia. Using interactive visualizations, you will be able to see how these variables have changed over time, and how they have been affected by changes in the cash rate. Additionally, we will provide a data table that you can sort and filter through to gain a deeper understanding of the data. By the end of this dashboard, you will have a better understanding of the impact of interest rate changes on the Australian housing market.</p>
+            <p>The Reserve Bank of Australia (RBA) sets the cash rate, which is the interest rate at which banks can borrow money from the RBA. Changes to the cash rate can have a significant impact on the Australian economy, particularly on the housing market.
+              <br>
+              <br>
+              When the cash rate increases, borrowing becomes more expensive, leading to higher mortgage rates and potentially slowing down the housing market. Conversely, when the cash rate decreases, borrowing becomes cheaper and the housing market may be stimulated.
+              <br>
+              <br>
+              In this dashboard, we will explore the relationship between changes in the RBA's cash rate and changes in mortgage rates and house prices in Australia. Using interactive visualizations, you will be able to see how these variables have changed over time, and how they have been affected by changes in the cash rate. Additionally, we will provide a data table that you can sort and filter through to gain a deeper understanding of the data. By the end of this dashboard, you will have a better understanding of the impact of interest rate changes on the Australian housing market.</p>
           </section>
-        </div>
-        <div class="col-4">
-          <section id="calculator">
-            <form>
-              <label>Enter Mortgage Size:</label>
-              <input type="text" id="mortgageSize" name="mortgageSize" required>
-              <br>
-              <label>Enter current APR:</label>
-              <input type="text" id="currentAPR" name="currentAPR" required>
-              <br>
-              <label>Enter Future APR:</label>
-              <input type="text" id="futureAPR" name="futureAPR" required>
-              <br><br>
-              <button type="button" onclick="calculateMortgageRepayments()">Calculate Repayments</button>
-            </form> 
-          <p id="repayments"></p>
-        </section>
         </div>
       </div>
       </div>
       <div class="container-fluid">
+        <h2>Data Tables</h2>
         <div class="row">
-          <div class="col-3">
-            <h2>RBA Cash Rate</h2>
+          <div class="col-sm-6">
+            <h3>RBA Cash Rate</h3>
             <section id="data">
-                <table id = "rba-data-table" class="table data-table">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Change (%)</th>
-                      <th>Cash Rate (%)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- data goes here -->
-                  </tbody>
-                </table>
-              </section>
+              <table id = "rba-data-table" class="table data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Change (%)</th>
+                    <th>Cash Rate (%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- data goes here -->
+                </tbody>
+              </table>
+            </section>
           </div>
-          <div class="col-3">
-            <h2>House Prices</h2>
+          <div class="col-sm-6">
+            <h3>House Prices</h3>
             <section id="data">
               <table id="abs-data-table" class="table data-table">
                 <thead>
@@ -104,8 +94,8 @@
               </table>
             </section>
           </div>
-          <div class="col-3">
-            <h2>Mortgage Rates</h2>
+          <div class="col-sm-4">
+            <h3>Mortgage Rates</h3>
             <section id="data">
               <table id="mortgage-data-table" class="table data-table">
                 <thead>
@@ -122,9 +112,9 @@
             </section>
           </div>
           </div>
+          <h2>Interactive Visualizations</h2>
           <div class="row">
-            <div class="col-6">
-              <h2>Interactive Visualizations</h2>
+            <div class="col-sm-12">
               <section id="visualization">
                 <div class="card">
                   <div class="card-body">
@@ -133,7 +123,7 @@
                 </div>
               </section>
             </div>
-            <div class="col-6">
+            <div class="col-sm-12">
               <section id="visualization">
                 <div class="card">
                   <div class="card-body">
@@ -143,7 +133,26 @@
               </section>
             </div>
           </div>
-        </div>
+          <h2>Mortgage Calculator</h2>
+          <div class="row">
+            <div class="col-sm-4">
+              <section id="calculator">
+                <form>
+                  <label>Enter Mortgage Size:</label>
+                  <input type="text" id="mortgageSize" name="mortgageSize" required>
+                  <br>
+                  <label>Enter current APR:</label>
+                  <input type="text" id="currentAPR" name="currentAPR" required>
+                  <br>
+                  <label>Enter Future APR:</label>
+                  <input type="text" id="futureAPR" name="futureAPR" required>
+                  <br><br>
+                  <button type="button" onclick="calculateMortgageRepayments()">Calculate Repayments</button>
+                </form> 
+              <p id="repayments"></p>
+              </section>
+            </div>
+         </div>
         <section id="conclusion">
           <h2>Conclusion</h2>
           <p>...content goes here...</p>

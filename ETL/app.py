@@ -40,6 +40,9 @@ rba_df.columns = ["date", "change_pct", "cash_rate_pct"]
 rba_df['date'] = pd.to_datetime(rba_df['date'], format='%d %b %Y')
 rba_df['date'] = rba_df['date'].dt.strftime('%Y-%m-%d')
 
+# Filter date column to only show dates after 30th September 2011
+rba_df = rba_df[rba_df['date'] > '2011-09-30']
+
 ## ABS API to DataFrame 'aus_df'
 # base URL
 base_url = 'https://api.data.abs.gov.au/data/'
@@ -85,9 +88,9 @@ aus_df = aus_df.rename(columns={'mean price of residential dwelling': 'mean_pric
 
 # connect to cloud database using SQLAlchemy
 protocol = 'postgresql'
-username = 'anshumanp'
-password = 'Anshuman123'
-host = 'mydbinstance-anshu.c3y42tkkiinb.us-east-2.rds.amazonaws.com'
+username = 'postgres'
+password = 'postgres'
+host = 'localhost'
 port = 5432
 database_name = 'rates_db'
 rds_connection_string = f'{protocol}://{username}:{password}@{host}:{port}/{database_name}'

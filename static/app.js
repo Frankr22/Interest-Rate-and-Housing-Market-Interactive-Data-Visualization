@@ -1,6 +1,6 @@
-// Add event listener
 document.addEventListener("DOMContentLoaded", function(){
 
+  // Get RBA data and Create DataTable and Line Chart
   $(document).ready(function() {
       $.ajax({
           type: "GET",
@@ -10,90 +10,69 @@ document.addEventListener("DOMContentLoaded", function(){
               var jsonData = JSON.parse(data);
               // Initialize the DataTable
               var table = $("#rba-data-table").DataTable({
-                  scrollY: "200px",
-                  data: jsonData,
-                  order: [[ 0, "desc" ]],
-                  searching: false,
-                  columns: [
-                      { data: "date"},
-                      { data: "change_pct" },
-                      { data: "cash_rate_pct" },
-                  ]
-              });
-          }
-      });
-  });
-
-  $(document).ready(function() {
+                scrollY: "200px",
+                data: jsonData,
+                order: [[ 0, "desc" ]],
+                searching: false,
+                columns: [
+                    { data: "date"},
+                    { data: "change_pct" },
+                    { data: "cash_rate_pct" },
+                ],
+                });
+              // Create Line Chart Cash Rate vs Date
+              var trace1 = {
+                  x: jsonData.map(function(d) { return d.date; }),
+                  y: jsonData.map(function(d) { return d.cash_rate_pct; }),
+                  mode: 'lines',
+                  type: 'scatter',
+                  name: 'Cash Rate'
+              };
       $.ajax({
-          type: "GET",
-          url: "http://127.0.0.1:5000/abs/data",
-          success: function(data) {
-              // Parse the JSON string into a JavaScript object
-              var jsonData = JSON.parse(data);
-              // Initialize the DataTable
-              var table = $("#abs-data-table").DataTable({
-                  scrollY: "200px",
-                  data: jsonData,
-                  order: [[ 0, "desc" ]],
-                  searching: false,
-                  columns: [
-                      { data: "date" },
-                      { data: "mean_price" },
-                  ]
-              });
+        type: "GET",
+        url: "http://127.0.0.1:5000/abs/data",
+        success: function(data) {
+            var abs_jsonData = JSON.parse(data);
+            // Initialize the DataTable
+            var table = $("#abs-data-table").DataTable({
+              scrollY: "200px",
+              data: abs_jsonData,
+              order: [[ 0, "desc" ]],
+              searching: false,
+              columns: [
+                  { data: "date" },
+                  { data: "mean_price" },
+              ]
+             });
+            // Create Line Chart House Price vs Date
+            var trace2 = {
+                x: abs_jsonData.map(function(d) { return d.date; }),
+                y: abs_jsonData.map(function(d) { return d.mean_price; }),
+                mode: 'lines',
+                type: 'scatter',
+                name: 'House Price',
+                yaxis: 'y2'
+            };
+            var layout = {
+                title: 'Cash Rate vs House Price',
+                xaxis: {
+                    title: 'Date'
+                },
+                yaxis: {
+                    title: 'Cash Rate (%)'
+                },
+                yaxis2: {
+                    title: 'House Price',
+                    overlaying: 'y',
+                    side: 'right'
+                }
+            };
+            var data = [trace1, trace2];
+            Plotly.newPlot('line-chart', data, layout); 
           }
-      });
-  });
-
-    // Get the data from both tables
-    var rbaTableData = document.querySelectorAll('#rba-data-table tbody tr');
-    // var absTableData = document.querySelectorAll('#abs-data-table tbody tr');
-
-    // Extract the date and cash rate data
-    Array.from(rbaTableData).sort((a, b) => new Date(a.children[0].textContent) - new Date(b.children[0].textContent)).forEach(function(row) {
-      var date = new Date(row.children[0].textContent);
-      var cashRate = parseFloat(row.children[2].textContent);
-
-      // Add the cash rate data to the chart
-      data[0].x.push(date);
-      data[0].y.push(cashRate);
-    });
-    
-    // // Extract the date and house price data
-    // Array.from(absTableData).sort((a, b) => new Date(a.children[0].textContent) - new Date(b.children[0].textContent)).forEach(function(row) {
-    //   var date = new Date(row.children[0].textContent);
-    //   var housePrice = parseFloat(row.children[1].textContent);
-
-    //  // Add the data to the chart
-    //   data.push({
-    //   x: [date],
-    //   y: [housePrice],
-    //   type: 'line',
-    //   name: 'House Price'
-    // });
-
-    // Define the chart layout
-    var layout = {
-      xaxis: {
-          type: 'date',
-          rangeslider: {
-              visible: true
-          }
+        });
       },
-      yaxis: {
-          title: 'Cash Rate (%)'
-      },
-    //   yaxis2: {
-    //     title: 'House Price (AUD)',
-    //     overlaying: 'y',
-    //     side: 'right',
-    //     showgrid: false
-    //   },
-    };
-
-    //Create the chart
-    Plotly.newPlot('line-chart', data, layout);
+  }); 
 
   // Initialize the map
   var map = L.map('map').setView([-25, 135], 4);
@@ -138,5 +117,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
       }
     }).addTo(map);
+});
 });
 });
