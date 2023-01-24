@@ -65,7 +65,7 @@ else:
     # Handle unsuccessful API call
     print("Error: Failed to fetch data from ABS website.")
 
-# Find the data using the path
+# find the data using the path
 series = json_data['data']['dataSets'][0]['series']
 
 # Series to add
@@ -82,16 +82,19 @@ time_period = pd.date_range(start='2011-07-01', periods=45, freq='Q')
 # Convert the date to YYYY-MM-DD format
 time_period = time_period.strftime('%Y-%m-%d')
 
+# Add the date column to the empty DataFrame
+aus_df['date'] = time_period
+
 # Loop through additional series
 for key, value in series_to_add.items():
     # Extract observations for each series
     observations = series[key]['observations']
-    # Create a new DataFrame with observations and time_period as the index
+    # Create a new DataFrame with observations
     new_df = pd.DataFrame.from_dict(observations,orient='index')
-    new_df.index = time_period
     new_df.rename(columns={0:value}, inplace=True)
-    # Concatenate new_df to aus_df
+    new_df = new_df.reset_index(drop=True)
     aus_df = pd.concat([aus_df, new_df], axis=1)
+
 aus_df.fillna(0, inplace=True)
 
 # connect to cloud database using SQLAlchemy

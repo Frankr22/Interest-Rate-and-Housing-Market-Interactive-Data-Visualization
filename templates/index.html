@@ -50,7 +50,6 @@
             <h2>Overview</h2>
             <p>The Reserve Bank of Australia (RBA) sets the cash rate, which is the interest rate at which banks can borrow money from the RBA. Changes to the cash rate can have a significant impact on the Australian economy, particularly on the housing market.
               <br>
-              <br>
               When the cash rate increases, borrowing becomes more expensive, leading to higher mortgage rates and potentially slowing down the housing market. Conversely, when the cash rate decreases, borrowing becomes cheaper and the housing market may be stimulated.
               <br>
               <br>
@@ -62,10 +61,11 @@
       <div class="container-fluid">
         <h2>Data Tables</h2>
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <h3>RBA Cash Rate</h3>
             <section id="data">
               <table id = "rba-data-table" class="table data-table">
+                <caption>Table 1: RBA Cash Rate Data - For more information and to access the data source, please visit the <a href='https://www.rba.gov.au/statistics/cash-rate/'>Reserve Bank of Australia's Official Cash Rate Data webpage</a>.</caption>
                 <thead>
                   <tr>
                     <th>Date</th>
@@ -79,14 +79,23 @@
               </table>
             </section>
           </div>
-          <div class="col-sm-6">
-            <h3>House Prices</h3>
+          <div class="col-sm-8">
+            <h3>House Prices ($'000)</h3>
             <section id="data">
               <table id="abs-data-table" class="table data-table">
+                <caption>Table 2: Mean Dwelling Prices in Australia - For more information and to access the data source, please visit the <a href='https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/total-value-dwellings/latest-release#mean-dwelling-price'>Australian Bureau of Statics Mean Dwelling Price webpage</a>.</caption>
                 <thead>
                   <tr>
                     <th>Date</th>
-                    <th>Average House Price ($'000)</th>
+                    <th>Australia</th>
+                    <th>NSW</th>
+                    <th>Victoria</th>
+                    <th>Queensland</th>
+                    <th>South Australia</th>
+                    <th>Western Australia</th>
+                    <th>Tasmania</th>
+                    <th>Northern Territory</th>
+                    <th>ACT</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -115,20 +124,24 @@
           </div>
           <h2>Interactive Visualizations</h2>
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
               <section id="visualization">
                 <div class="card">
                   <div class="card-body">
                     <div id="line-chart"></div>
+                    <p class="card-text">This Line Chart shows the relationship between the Cash Rate (%) and House Prices in Australia.
+                      You can toggle house prices for each state by clicking on the legend.</p>
                   </div>
                 </div>
               </section>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-6">
               <section id="visualization">
                 <div class="card">
                   <div class="card-body">
                     <div id="map"></div>
+                    <p class="card-text">This map shows average house prices in Australia
+                      You can click on each state ro display the latest average house price.</p>
                   </div>
                 </div>
               </section>
