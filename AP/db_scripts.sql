@@ -14,5 +14,13 @@ CREATE TABLE interest_rates (
 CREATE TABLE aus_dwelling_mean (
   id SERIAL PRIMARY KEY,
   date DATE,
-  mean_price VARCHAR(20)
+  aus_mean_price VARCHAR(20),
+  nsw_mean_price VARCHAR(20),
+  vic_mean_price VARCHAR(20),
+  qld_mean_price VARCHAR(20),
+  sa_mean_price VARCHAR(20),
+  wa_mean_price VARCHAR(20),
+  tas_mean_price VARCHAR(20),
+  nt_mean_price VARCHAR(20),
+  act_mean_price VARCHAR(20)
 );

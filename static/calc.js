@@ -1,5 +1,4 @@
-$(document).ready(function(){
-    function calculateMortgageRepayments() {
+function calculateMortgageRepayments() {
       // Get user input
       let mortgageSize = document.getElementById("mortgageSize").value;
       let currentAPR = document.getElementById("currentAPR").value;
@@ -13,6 +12,39 @@ $(document).ready(function(){
   
       // Display the results
       document.getElementById("repayments").innerHTML = "Current Monthly Payment: " + currentMonthlyPayment.toFixed(2) + "<br>Future Monthly Payment: " + futureMonthlyPayment.toFixed(2);
-    }
-  });
+};
+
+function chooseColor(state) {
+  switch (state) {
+  case "New South Wales":
+  return "yellow";
+  case "Victoria":
+  return "red";
+  case "Queensland":
+  return "orange";
+  case "South Australia":
+  return "green";
+  case "Western Australia":
+  return "purple";
+  case "Tasmania":
+  return "blue";
+  case "Northern Territory":
+  return "pink";
+  case "Australian Capital Territory":
+  return "black";
+  default:
+  return "white";
+}
+};
+  
+var stateToPrice = {
+  "New South Wales": "nsw_mean_price",
+  "Victoria": "vic_mean_price",
+  "Queensland": "qld_mean_price",
+  "South Australia": "sa_mean_price",
+  "Western Australia": "wa_mean_price",
+  "Tasmania": "tas_mean_price",
+  "Northern Territory": "nt_mean_price",
+  "Australian Capital Territory": "act_mean_price"
+};
   

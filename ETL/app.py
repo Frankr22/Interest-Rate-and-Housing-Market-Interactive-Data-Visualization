@@ -65,14 +65,16 @@ else:
     # Handle unsuccessful API call
     print("Error: Failed to fetch data from ABS website.")
 
-# find the data using the path
+# Find the data using the path
 series = json_data['data']['dataSets'][0]['series']
 
-# locate series of interest
-mean_aus_dwelling = series['4:3:0']['observations']
+# Series to add
+series_to_add = {'4:3:0': 'aus_mean_price','4:5:0': 'nsw_mean_price', '4:7:0': 'vic_mean_price', '4:2:0': 'qld_mean_price',
+                 '4:0:0': 'sa_mean_price', '4:6:0': 'wa_mean_price', '4:8:0': 'tas_mean_price',
+                 '4:4:0': 'nt_mean_price', '4:1:0': 'act_mean_price'}
 
-# Convert JSON data into a DataFrame
-aus_df = pd.DataFrame.from_dict(mean_aus_dwelling, orient='index', columns=['mean price of residential dwelling'])
+# Initialize an empty DataFrame
+aus_df = pd.DataFrame()
 
 # Create a PeriodIndex for the time period with a frequency of 'Q' for quarters
 time_period = pd.date_range(start='2011-07-01', periods=45, freq='Q')
@@ -80,11 +82,17 @@ time_period = pd.date_range(start='2011-07-01', periods=45, freq='Q')
 # Convert the date to YYYY-MM-DD format
 time_period = time_period.strftime('%Y-%m-%d')
 
-# Add the date column to the DataFrame
-aus_df['date'] = time_period
-
-# Rename the columns
-aus_df = aus_df.rename(columns={'mean price of residential dwelling': 'mean_price'})
+# Loop through additional series
+for key, value in series_to_add.items():
+    # Extract observations for each series
+    observations = series[key]['observations']
+    # Create a new DataFrame with observations and time_period as the index
+    new_df = pd.DataFrame.from_dict(observations,orient='index')
+    new_df.index = time_period
+    new_df.rename(columns={0:value}, inplace=True)
+    # Concatenate new_df to aus_df
+    aus_df = pd.concat([aus_df, new_df], axis=1)
+aus_df.fillna(0, inplace=True)
 
 # connect to cloud database using SQLAlchemy
 protocol = 'postgresql'
@@ -118,7 +126,7 @@ def data1():
 @app.route('/abs/data')
 def data2():
     # Query the database
-    query = 'SELECT date, mean_price FROM aus_dwelling_mean'
+    query = 'SELECT * FROM aus_dwelling_mean'
     aus_df = pd.read_sql_query(query, con=engine)
     # Convert the data to a JSON object
     data = aus_df.to_json(orient='records', force_ascii=False)
