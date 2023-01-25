@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <div class="header-section">
-      <img src="/data/DALL·E 2023-01-18 12.38.05 - Interest Rate Changes and the Australian Housing Market.png" alt="Header Image" width="5%" height="5%" class="header-image">
+      <img src="data/DALL·E 2023-01-18 12.38.05 - Interest Rate Changes and the Australian Housing Market.png" alt="Header Image" width="5%" height="5%" class="header-image">
       <h1 class="header-title">Interest Rate Changes and the Australian Housing Market</h1>
       <a href="https://github.com/Frankr22/InteractiveDataViz" class="github-link">Github</a>
    </div>
@@ -15,11 +15,11 @@
     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
     crossorigin=""></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="static/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="/static/calc.js"></script>
-    <script src="/static/app.js"></script>
+    <script src="static/calc.js"></script>
+    <script src="static/app.js"></script>
   </head>
   <body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -32,10 +32,13 @@
             <a class="nav-link" href="#overview">Overview</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#visualization">Interactive Visualization</a>
+            <a class="nav-link" href="#visualization">Interactive Visualizations</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#data">Data Table</a>
+            <a class="nav-link" href="#data">Data Tables</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#calculator">Mortgage Calculator</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#conclusion">Conclusion</a>
@@ -108,10 +111,10 @@
             <h3>Mortgage Rates</h3>
             <section id="data">
               <table id="mortgage-data-table" class="table data-table">
+                <caption>Table 3: RBA Mortgage Rate Data - For more information and to access the data source, please visit the <a href='https://www.rba.gov.au/statistics/interest-rates/'>Reserve Bank of Australia's Official Lending Rates Data webpage</a>.</caption>
                 <thead>
                   <tr>
                     <th>Date</th>
-                    <th>Change (%)</th>
                     <th>Rate (%)</th>
                   </tr>
                 </thead>
@@ -140,8 +143,8 @@
                 <div class="card">
                   <div class="card-body">
                     <div id="map"></div>
-                    <p class="card-text">This map shows average house prices in Australia
-                      You can click on each state ro display the latest average house price.</p>
+                    <p class="card-text">This interactive map allows you to explore housing prices in different states of Australia. 
+                      Click on a state to zoom in and see the latest mean house price in a pop-up. Use the chart to compare house prices among different states."</p>
                   </div>
                 </div>
               </section>
@@ -152,19 +155,21 @@
             <div class="col-sm-4">
               <section id="calculator">
                 <form>
-                  <label>Enter Mortgage Size:</label>
-                  <input type="text" id="mortgageSize" name="mortgageSize" required>
-                  <br>
-                  <label>Enter current APR:</label>
-                  <input type="text" id="currentAPR" name="currentAPR" required>
-                  <br>
-                  <label>Enter Future APR:</label>
-                  <input type="text" id="futureAPR" name="futureAPR" required>
-                  <br><br>
-                  <button type="button" onclick="calculateMortgageRepayments()">Calculate Repayments</button>
+                  <catption> Enter the mortgage size and the calculator will display the change in monthly repayments for a mortgage of this size.</catption>
+                    <label><b>Enter Mortgage Size:</b></label>
+                    <input type="text" id="mortgageSize" name="mortgageSize" required>
+                    <br><br>
+                    <button type="button" onclick="calculateMortgageRepayments()">Calculate Repayments</button>
+                    <br><br>
+                    <label><b>30th April 2022 Mortgage Rate:</b><br>2.63%</label>
+                    <span id="currentAPR"></span>
+                    <br>
+                    <label><b>Latest Mortgage Rate:</b><br> 4.36%</label>
+                    <span id="futureAPR"></span>
+                    <br><br>
+                    <output type="text" id="monthlyRepayments" name="monthlyRepayments"></output>
                 </form> 
-              <p id="repayments"></p>
-              </section>
+              </section>            
             </div>
          </div>
         <section id="conclusion">

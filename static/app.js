@@ -2,6 +2,22 @@ document.addEventListener("DOMContentLoaded", function(){
   // Get RBA data and Create DataTable and Line Chart
   $(document).ready(function() {
       $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:5000/mortgage/data",
+        success: function(data) {
+            var abs_jsonData = JSON.parse(data);
+            // Initialize the DataTable
+            var table = $("#mortgage-data-table").DataTable({
+              scrollY: "200px",
+              data: abs_jsonData,
+              order: [[ 0, "desc" ]],
+              searching: false,
+              columns: [
+                  { data: "date" },
+                  { data: "mortgage_rate" }
+              ]
+            });
+      $.ajax({
           type: "GET",
           url: "http://127.0.0.1:5000/rba/data",
           success: function(data) {
@@ -66,7 +82,8 @@ document.addEventListener("DOMContentLoaded", function(){
               mode: 'lines',
               type: 'scatter',
               name: 'NSW Mean Price',
-              yaxis: 'y2'
+              yaxis: 'y2',
+              visible: 'legendonly'
             };
             var trace4 = {
               x: abs_jsonData.map(function(d) { return d.date; }),
@@ -74,7 +91,8 @@ document.addEventListener("DOMContentLoaded", function(){
               mode: 'lines',
               type: 'scatter',
               name: 'VIC Mean Price',
-              yaxis: 'y2'
+              yaxis: 'y2',
+              visible: 'legendonly'
             };
             var trace5 = {
               x: abs_jsonData.map(function(d) { return d.date; }),
@@ -82,7 +100,8 @@ document.addEventListener("DOMContentLoaded", function(){
               mode: 'lines',
               type: 'scatter',
               name: 'QLD Mean Price',
-              yaxis: 'y2'
+              yaxis: 'y2',
+              visible: 'legendonly'
             };
             var trace6 = {
               x: abs_jsonData.map(function(d) { return d.date; }),
@@ -90,7 +109,8 @@ document.addEventListener("DOMContentLoaded", function(){
               mode: 'lines',
               type: 'scatter',
               name: 'SA Mean Price',
-              yaxis: 'y2'
+              yaxis: 'y2',
+              visible: 'legendonly'
             };
             var trace7 = {
               x: abs_jsonData.map(function(d) { return d.date; }),
@@ -98,7 +118,8 @@ document.addEventListener("DOMContentLoaded", function(){
               mode: 'lines',
               type: 'scatter',
               name: 'WA Mean Price',
-              yaxis: 'y2'
+              yaxis: 'y2',
+              visible: 'legendonly'
             };
             var trace8 = {
               x: abs_jsonData.map(function(d) { return d.date; }),
@@ -106,7 +127,8 @@ document.addEventListener("DOMContentLoaded", function(){
               mode: 'lines',
               type: 'scatter',
               name: 'TAS Mean Price',
-              yaxis: 'y2'
+              yaxis: 'y2',
+              visible: 'legendonly'
             };
             var trace9 = {
               x: abs_jsonData.map(function(d) { return d.date; }),
@@ -114,7 +136,8 @@ document.addEventListener("DOMContentLoaded", function(){
               mode: 'lines',
               type: 'scatter',
               name: 'NT Mean Price',
-              yaxis: 'y2'
+              yaxis: 'y2',
+              visible: 'legendonly'
             };
             var trace10 = {
               x: abs_jsonData.map(function(d) { return d.date; }),
@@ -122,7 +145,8 @@ document.addEventListener("DOMContentLoaded", function(){
               mode: 'lines',
               type: 'scatter',
               name: 'ACT Mean Price',
-              yaxis: 'y2'
+              yaxis: 'y2',
+              visible: 'legendonly'
             };
             var data = [trace1, trace2, trace3, trace4, trace5, trace6, trace7, trace8, trace9, trace10];
             var layout = {
@@ -137,7 +161,17 @@ document.addEventListener("DOMContentLoaded", function(){
                                 title: 'House Price',
                                 overlaying: 'y',
                                 side: 'right'
-                            }
+                            },
+                            legend: {
+                              x: 1.8,
+                              xanchor: 'right',
+                              y: 1,
+                              yanchor: 'top',
+                              bgcolor: 'rgba(255, 255, 255, 0.5)',
+                              bordercolor: 'black',
+                              borderwidth: 2,
+                              margin: {t: 20, r: 20, b: 20, l: 20}
+                          }
                           };
             Plotly.newPlot('line-chart', data, layout);
             // Initialize the map
@@ -156,8 +190,9 @@ document.addEventListener("DOMContentLoaded", function(){
                 onEachFeature: function(feature, layer) {
                   // Get the state name from the GeoJSON data
                   var stateName = feature.properties.STATE_NAME;
-                  var statePrice = abs_jsonData[0][stateToPrice[stateName]]*1000;
+                  var statePrice = abs_jsonData[abs_jsonData.length-1][stateToPrice[stateName]]*1000;
                   var price = statePrice ? statePrice.toLocaleString() : "No data available";
+                  var latestDate = abs_jsonData[abs_jsonData.length-1].date;
                   var color = chooseColor(stateName);
                   // Set the mouse events to change the map styling.
                   layer.on({
@@ -174,10 +209,10 @@ document.addEventListener("DOMContentLoaded", function(){
                           });
                       },
                       click: function(event) {
-                          map.fitBounds(event.target.getBounds());
-                          // Use the state name in the map popup
-                          layer.bindPopup("<b>" + stateName + "</b><br>Mean Price ($): " + price);
-                      }
+                        map.fitBounds(event.target.getBounds());
+                        // Use the state name in the map popup
+                        event.target.bindPopup("<b>" + stateName + "</b><br>Mean Price ($): " + price + "<br>Date: " + latestDate);
+                      },
                   });
                   layer.setStyle({
                     fillColor: color,
@@ -191,6 +226,8 @@ document.addEventListener("DOMContentLoaded", function(){
       } 
     }); 
   }
+});
+        }
 });
 });
 }); 

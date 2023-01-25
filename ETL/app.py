@@ -98,6 +98,18 @@ for key, value in series_to_add.items():
 
 aus_df.fillna(0, inplace=True)
 
+# CSV Mortgage Data into Dataframe 'mortgage_df'
+# read the csv file and store it in a variable called 'data'
+mortgage_df = pd.read_csv('../data/housinglending.csv')
+# Select just the first two columns
+mortgage_df = mortgage_df.iloc[:, :2]
+# Rename the columns
+mortgage_df.columns = ['date', 'mortgage_rate']
+# Change the date format
+mortgage_df['date'] = pd.to_datetime(mortgage_df['date'], format='%d/%m/%Y').dt.strftime('%Y-%m-%d')
+# drop null value rows
+mortgage_df = mortgage_df.dropna()
+
 # connect to cloud database using SQLAlchemy
 protocol = 'postgresql'
 host = 'mydbinstance-anshu.c3y42tkkiinb.us-east-2.rds.amazonaws.com'
@@ -110,6 +122,7 @@ insp = inspect(engine)
 # Load DataFrames into Postgres Database
 rba_df.to_sql(name='interest_rates', con=engine, if_exists='replace', index=False)
 aus_df.to_sql(name='aus_dwelling_mean', con=engine, if_exists='replace', index=False)
+mortgage_df.to_sql(name='housing_lending', con=engine, if_exists='replace', index=False)
 
 app = Flask(__name__)
 CORS(app)
@@ -132,6 +145,16 @@ def data2():
     aus_df = pd.read_sql_query(query, con=engine)
     # Convert the data to a JSON object
     data = aus_df.to_json(orient='records', force_ascii=False)
+    return jsonify(data)
+
+# define a route to retrieve data from the database and serve it as a JSON response
+@app.route('/mortgage/data')
+def data3():
+    # Query the database
+    query = 'SELECT * FROM housing_lending'
+    mortgage_df = pd.read_sql_query(query, con=engine)
+    # Convert the data to a JSON object
+    data = mortgage_df.to_json(orient='records', force_ascii=False)
     return jsonify(data)
 
 if __name__ == '__main__':

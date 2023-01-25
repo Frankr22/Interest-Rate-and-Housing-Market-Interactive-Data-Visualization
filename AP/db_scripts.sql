@@ -24,3 +24,8 @@ CREATE TABLE aus_dwelling_mean (
   nt_mean_price VARCHAR(20),
   act_mean_price VARCHAR(20)
 );
+
+CREATE TABLE housing_lending (
+date DATE,
+mortgage_rate FLOAT
+);
