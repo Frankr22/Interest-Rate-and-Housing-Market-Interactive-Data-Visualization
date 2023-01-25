@@ -6,6 +6,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy import inspect
 from flask_cors import CORS
+import config
 
 ## RBA SCRAPE to DataFram 'rba_df'
 # Make a request to the RBA website
@@ -99,12 +100,10 @@ aus_df.fillna(0, inplace=True)
 
 # connect to cloud database using SQLAlchemy
 protocol = 'postgresql'
-username = 'postgres'
-password = 'postgres'
-host = 'localhost'
+host = 'mydbinstance-anshu.c3y42tkkiinb.us-east-2.rds.amazonaws.com'
 port = 5432
 database_name = 'rates_db'
-rds_connection_string = f'{protocol}://{username}:{password}@{host}:{port}/{database_name}'
+rds_connection_string = f'{protocol}://{config.username}:{config.password}@{host}:{port}/{database_name}'
 engine = create_engine(rds_connection_string)
 insp = inspect(engine)
 
@@ -119,7 +118,7 @@ CORS(app)
 @app.route('/rba/data')
 def data1():
     # Query the database
-    query = 'SELECT date, change_pct, cash_rate_pct FROM interest_rates'
+    query = 'SELECT * FROM interest_rates'
     rba_df = pd.read_sql_query(query, con=engine)
     # Convert the data to a JSON object
     data = rba_df.to_json(orient='records', force_ascii=False)
