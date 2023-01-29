@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function(){
                                 side: 'right'
                             },
                             legend: {
-                              x: 1.8,
+                              x: 1.25,
                               xanchor: 'right',
                               y: 1,
                               yanchor: 'top',
