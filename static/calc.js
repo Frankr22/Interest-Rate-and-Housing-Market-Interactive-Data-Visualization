@@ -1,20 +1,23 @@
 function calculateMortgageRepayments() {
   // Get user input
   let mortgageSize = document.getElementById("mortgageSize").value;
+  let termMonths = 360;
   let pastAPR = 2.63;
-  let currentAPR = $("#mortgage-data-table tr:last td:last").text();
+  let pastAPRPerMonth = pastAPR / 1200;
+  let currentAPR = 4.36;
+  let currentAPRPerMonth = currentAPR / 1200;
 
   //Calculate average monthly mortgage repayments at past APR
-  let pastMonthlyPayment = (mortgageSize * (pastAPR / 12) / (1 - (Math.pow(1 / (1 + (pastAPR / 12)), 360))))/30;
+  let pastMonthlyPayment = mortgageSize * (pastAPRPerMonth * (Math.pow(1 + pastAPRPerMonth, termMonths))) / (Math.pow(1 + pastAPRPerMonth, termMonths) - 1);
 
   //Calculate average monthly mortgage repayments at latest APR
-  let currentMonthlyPayment = (mortgageSize * (currentAPR / 12) / (1 - (Math.pow(1 / (1 + (currentAPR / 12)), 360))))/30;
+  let currentMonthlyPayment = mortgageSize * (currentAPRPerMonth * (Math.pow(1 + currentAPRPerMonth, termMonths))) / (Math.pow(1 + currentAPRPerMonth, termMonths) - 1);
   
   //Calculate the change in monthly repayments
   let change = currentMonthlyPayment - pastMonthlyPayment;
 
   // Display the results
-  document.getElementById("monthlyRepayments").innerHTML = "Current Monthly Payment: " + currentMonthlyPayment.toFixed(0) + "<br> Past Monthly Payment: " + pastMonthlyPayment.toFixed(0) + "<br> Change in Monthly Payment: " + change.toFixed(0);
+  document.getElementById("monthlyRepayments").innerHTML = "Current Monthly Payment: $" + currentMonthlyPayment.toFixed(2) + "<br> Past Monthly Payment: $" + pastMonthlyPayment.toFixed(2) + "<br> Change in Monthly Payment: $" + change.toFixed(2);
 };
 
 var stateToPrice = {
