@@ -12,6 +12,10 @@ These instructions will get you a copy of the project up and running on your loc
 - JavaScript
 - Plotly.js
 - Bootstrap 4
+- Jquery 3.6.0
+- Jquery UI 1.12.1
+- D3.js v6
+- Leaflet 1.9.3
 
 ## Installing
 - Clone the repository to your local machine:
@@ -26,6 +30,10 @@ These instructions will get you a copy of the project up and running on your loc
 - Flask - The web framework used
 - Plotly.js - JavaScript library for creating interactive charts
 - Bootstrap 4 - Front-end component library
+- Jquery 3.6.0 - JavaScript library for creating interactive elements on the page
+- Jquery UI 1.12.1 - JavaScript library for creating user interface widgets
+- D3.js v6 - JavaScript library for creating dynamic and interactive data visualizations
+- Leaflet 1.9.3 - JavaScript library for creating maps and interactive map layers
 
 ## Acknowledgments
 Data used in this project is sourced from the Reserve Bank of Australia's official website, as well as from the Australian Bureau of Statics API.
