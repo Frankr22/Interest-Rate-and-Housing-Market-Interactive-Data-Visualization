@@ -1,0 +1,3 @@
+Flask==1.1.2
+Plotly==4.10.0
+Bootstrap-Flask==1.0.0
