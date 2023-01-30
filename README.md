@@ -22,6 +22,7 @@ These instructions will get you a copy of the project up and running on your loc
   - Copy code: git clone https://github.com/Frankr22/InteractiveDataViz.git
 - Install the required packages:
   - Copy code: pip install -r requirements.txt
+- Create a file 'config.py' within your local respository and enter the username and password (available upon request)
 - Start the development server:
   - Copy code python app.py
 - Open the index.html in your browser
