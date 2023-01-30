@@ -1,0 +1,26 @@
+/*
+ * Static: Default positioning
+ */
+
+ table {
+  width: 100%; /* fill the parent div */
+  /* other table styles */
+  border: 1px solid;
+}
+
+div::-webkit-scrollbar {
+  width: 8px;
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 4px;
+}
+
+td, th {
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+}
+

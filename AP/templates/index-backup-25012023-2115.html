@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Australia Financial Analysis</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!--link rel="stylesheet" href="static.css"-->
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand">Resident Dwelling Analysis</a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="#" class="nav-item nav-link active">Home</a>
+                <a href="#" class="nav-item nav-link">Services</a>
+                <a href="#" class="nav-item nav-link">About</a>
+                <a href="#" class="nav-item nav-link">Contact</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <a href="#" class="nav-item nav-link">Register</a>
+                <a href="#" class="nav-item nav-link">Login</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <!--
+        <div class="p-5 my-4 bg-light rounded-3">
+        <h1>Learn to Create Websites</h1>
+        <p class="lead">In today's world internet is the most popular way of connecting with the people. At <a href="https://www.tutorialrepublic.com" class="text-success" target="_blank">tutorialrepublic.com</a> you will learn the essential web development technologies along with real life practice examples, so that you can create your own website to connect with the people around the world.</p>
+        <p><a href="https://www.tutorialrepublic.com" target="_blank" class="btn btn-success btn-lg">Get started today</a></p>
+    </div>
+    -->
+    <div class="p-5 my-4 bg-light rounded-3">
+    <h1>Synopsis</h1>
+    <p>The usually overheated Sydney property market bore the brunt of last year’s property value declines, with Domain research showing that housing values dropped by 10.9% in the harbour city and 5.9% in Melbourne.</p>
+    <p>Canberra and Brisbane house values fell by -6% and -1.1% respectively last year. Adelaide, meanwhile, was up by 10.2%—no doubt due to its lower house prices—and Perth home values increased by 5.7% for the year. Combined capital city house prices were down -5.% in 2022.</p>    
+    <p>However, the December quarter was relatively mild compared to the September figures. Most notably, house prices in Sydney, Brisbane and Canberra saw an easing pace of quarterly decline in December, while Melbourne, Adelaide and Hobart stabilised with some minor growth, according to Domain chief of research and economics, Dr Nicola Powell.</p>
+    <p>Powell said: “The spring selling season bore the brunt of interest rate shocks and sky-high inflation levels. This is why the September quarter saw house prices fall at their fastest quarterly rate.”</p>
+    <p>Melbourne values grew by a subtle .7% in the December quarter, while Sydney slowed its pace of decline to -2.1%.</p>
+</div>
+
+<div class="container">
+    <h3>States with residensial dwelling mean (2022)</h3>
+    <style>
+        table {
+          border-collapse: collapse;
+        }
+        td, th {
+          border: 1px solid black;
+          padding: 8px;
+        }
+      </style>
+      
+    <!--div style="overflow: auto; width: 650px; height: 200px; border: 1px solid;"-->
+     <div  style="overflow: auto; width: 650px; height: 200px; ">
+        <table>
+            <colgroup>
+                <col style="width: 100%;">
+              </colgroup>
+            <thead>
+                <tr >
+                    <th>Region</th>
+                    <th>Mean Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row.region }}</td>
+                    <td>{{ row.avg_mean_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div><br>
+
+<style>
+    .nice-box {
+    /* Add CSS styling for the "nice box" appearance */
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    }
+  </style>
+
+<!--Tescode here start-->
+<div class="container">
+<div class="row">
+    <div class="nice-box">    
+    <form>
+    <div class="col-md-6" style="column-count: 3;">
+        <div class="checkbox-column">
+            <label for="checkbox1">
+              <input type="checkbox" id="checkbox1" name="checkbox1" value="value1">NSW
+            </label><br>
+            <label for="checkbox2">
+              <input type="checkbox" id="checkbox2" name="checkbox2" value="value2">WA
+            </label><br>
+            <label for="checkbox3">
+              <input type="checkbox" id="checkbox3" name="checkbox3" value="value3">VIC
+            </label>
+            </div>
+    </div>
+    
+</form>
+</div>
+
+</div>  
+</div>
+<!--Tescode here start-->
+
+<div class="container">
+    <div class="nice-box">    
+    <form>
+        <div class="checkbox-column">
+        <label for="checkbox1">
+          <input type="checkbox" id="checkbox1" name="checkbox1" value="value1">NSW
+        </label><br>
+        <label for="checkbox2">
+          <input type="checkbox" id="checkbox2" name="checkbox2" value="value2">WA
+        </label><br>
+        <label for="checkbox3">
+          <input type="checkbox" id="checkbox3" name="checkbox3" value="value3">VIC
+        </label>
+        </div>
+
+        <div class="checkbox-column">
+            <label for="checkbox4">
+              <input type="checkbox" id="checkbox4" name="checkbox4" value="value1">ACT
+            </label><br>
+            <label for="checkbox5">
+              <input type="checkbox" id="checkbox5" name="checkbox5" value="value2">NT
+            </label><br>
+            <label for="checkbox6">
+              <input type="checkbox" id="checkbox6" name="checkbox6" value="value3">SA
+            </label>
+        </div>
+
+
+      </form>
+    </div>
+</div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <h2>HTML</h2>
+            <p>HTML is the standard markup language for describing the structure of the web pages. Our HTML tutorials will help you to understand the basics of latest HTML5 language, so that you can create your own web pages or website.</p>
+            <p><a href="https://www.tutorialrepublic.com/html-tutorial/" target="_blank" class="btn btn-success">Learn More &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>CSS</h2>
+            <p>CSS is used for describing the presentation of web pages. CSS can save a lot of time and effort. Our CSS tutorials will help you to learn the essentials of latest CSS3, so that you can control the style and layout of your website.</p>
+            <p><a href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" class="btn btn-success">Learn More &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Bootstrap</h2>
+            <p>Bootstrap is a powerful front-end framework for faster and easier web development. Our Bootstrap tutorials will help you to learn all the features of latest Bootstrap 4 framework so that you can easily create responsive websites.</p>
+            <p><a href="https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank" class="btn btn-success">Learn More &raquo;</a></p>
+        </div>
+    </div>
+    <hr>
+    <footer>
+        <div class="row">
+            <div class="col-md-6">
+                <p>Copyright &copy; 2021 Tutorial Republic</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="#" class="text-dark">Terms of Use</a> 
+                <span class="text-muted mx-2">|</span> 
+                <a href="#" class="text-dark">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
