@@ -1,5 +1,5 @@
 # InteractiveDataViz
-Project 3 Data Analysis Bootcamp - Interactive Data Visualisations
+Interactive Data Visualisations
 
 ## Interest Rate Changes and the Australian Housing Market
 This project explores the relationship between changes in the Reserve Bank of Australia's cash rate and changes in mortgage rates and house prices in Australia. The interactive dashboard provides an overview of the impact of interest rate changes on the Australian housing market, with visualizations and data tables that allow users to sort and filter through the data.
