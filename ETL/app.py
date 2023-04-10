@@ -6,7 +6,6 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy import inspect
 from flask_cors import CORS
-import config
 
 ## RBA SCRAPE to DataFram 'rba_df'
 # Make a request to the RBA website
@@ -110,16 +109,12 @@ mortgage_df['date'] = pd.to_datetime(mortgage_df['date'], format='%d/%m/%Y').dt.
 # drop null value rows
 mortgage_df = mortgage_df.dropna()
 
-# connect to cloud database using SQLAlchemy
-protocol = 'postgresql'
-host = 'mydbinstance-anshu.c3y42tkkiinb.us-east-2.rds.amazonaws.com'
-port = 5432
-database_name = 'rates_db'
-rds_connection_string = f'{protocol}://{config.username}:{config.password}@{host}:{port}/{database_name}'
-engine = create_engine(rds_connection_string)
+# Connect to the SQLite database using SQLAlchemy
+sqlite_connection_string = 'sqlite:///rates_db.sqlite3'
+engine = create_engine(sqlite_connection_string)
 insp = inspect(engine)
 
-# Load DataFrames into Postgres Database
+# Load DataFrames into SQLite Database
 rba_df.to_sql(name='interest_rates', con=engine, if_exists='replace', index=False)
 aus_df.to_sql(name='aus_dwelling_mean', con=engine, if_exists='replace', index=False)
 mortgage_df.to_sql(name='housing_lending', con=engine, if_exists='replace', index=False)
