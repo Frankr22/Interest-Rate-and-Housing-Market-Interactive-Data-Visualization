@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-# InteractiveDataViz
-Interactive Data Visualisations
-=======
 # Interest Rate Impact on Australian Housing: An Interactive Data Visualization
->>>>>>> 5bbd73962103b533be4039d24a221946aba04b57
 
 ## Overview
 This project explores the relationship between the Reserve Bank of Australia's cash rate changes and shifts in mortgage rates and house prices within Australia. With the recent surge in interest rate alterations, understanding their potential impact on the Australian housing market is crucial. This application aims to provide an interactive dashboard that offers users comprehensive insights into the effects of interest rate changes on housing prices through data visualizations and tables.
