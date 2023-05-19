@@ -1,4 +1,4 @@
-# InteractiveDataViz
+# Interest Rate and Housing Market Interactive Data Visualization
 Project 3 Data Analysis Bootcamp - Interactive Data Visualisations
 
 ## Interest Rate Changes and the Australian Housing Market
